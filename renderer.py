@@ -11,7 +11,7 @@ class TwoDRenderer(draw.DrawDelegate):
     def onDraw(self):
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
         glLoadIdentity()
-        #glClearColor(*Environment.bgcolor)
+        glClearColor(*Environment.bgcolor)
         glTranslatef(0.0, 0.0, -10.0)
         for obj in self.objs:
             obj.draw()
