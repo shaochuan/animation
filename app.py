@@ -3,6 +3,7 @@ from OpenGL.GLUT import glutSwapBuffers, glutPostRedisplay
 from OpenGL.GLU import gluPerspective
 import sys
 import scene
+from env import Environment
 
 class App(object):
     def __init__(self):
@@ -23,6 +24,7 @@ class App(object):
         if self.idleDelegate:
             self.idleDelegate.onIdle()
             return
+        self.scene.step(Environment.dt)
         glutPostRedisplay()
 
     def onKey(self, *args):
