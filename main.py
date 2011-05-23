@@ -13,15 +13,34 @@ import sys
 
 from component import Ball
 from app import App
+import scene
+from renderer import TwoDRenderer
 
+def printHelp():
+    print '''
+    Usage:
+        $ python main.py -i scene_filename
+    '''
+
+def getSceneFileName():
+    if '-i' in sys.argv:
+        ind = sys.argv.index('-i')
+        return sys.argv[ind+1]
+    else:
+        print >> sys.stderr, "Scene File Not Found!"
+        printHelp()
+        sys.exit(1)
 
 window_size = (640, 480)
 window_name = 'Animation'
 app = App()
-app.drawDelegate = TwoDRenderer(window_size)
+components = scene.loadSceneComponents(getSceneFileName())
+app.scene = scene.Scene(components)
+app.drawDelegate = TwoDRenderer(window_size, components)
+
 
 def initialization():
-    glutInit(sys.argv)
+    glutInit([])
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH)
     glutInitWindowSize(*window_size)
     glutInitWindowPosition(0, 0)

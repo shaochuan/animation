@@ -2,6 +2,7 @@ from OpenGL.GL import *
 from OpenGL.GLUT import glutSwapBuffers, glutPostRedisplay
 from OpenGL.GLU import gluPerspective
 import sys
+import scene
 
 class App(object):
     def __init__(self):
@@ -10,26 +11,13 @@ class App(object):
         self.keyDelegate = None    # expect callable or has onKey method
         self.mouseDelegate = None  # expect callable or has onMouse method
         self.resizeDelegate = None # expect callable or has onResize method
+        self.scene = scene.DummyScene()
 
     def onDraw(self):
         if self.drawDelegate:
             self.drawDelegate.onDraw()
             return
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-        glLoadIdentity()
-
-        # We have smooth color mode on, this will blend across the vertices.
-        # Draw a triangle rotated on the Y axis.
-        glBegin(GL_POLYGON)                 # Start drawing a polygon
-        glColor3f(1.0, 0.0, 0.0)            # Red
-        glVertex3f(0.0, 1.0, 0.0)           # Top
-        glColor3f(0.0, 1.0, 0.0)            # Green
-        glVertex3f(1.0, -1.0, 0.0)          # Bottom Right
-        glColor3f(0.0, 0.0, 1.0)            # Blue
-        glVertex3f(-1.0, -1.0, 0.0)         # Bottom Left
-        glEnd()
-
-        glutSwapBuffers()
+        self._defaultOnDraw()
 
     def onIdle(self):
         if self.idleDelegate:
@@ -76,3 +64,21 @@ class App(object):
         glLoadIdentity()
         gluPerspective(60.0, float(width)/float(height), 0.1, 100.0)
         glMatrixMode(GL_MODELVIEW)
+
+    def _defaultOnDraw(self):
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+        glLoadIdentity()
+
+        # We have smooth color mode on, this will blend across the vertices.
+        # Draw a triangle rotated on the Y axis.
+        glBegin(GL_POLYGON)                 # Start drawing a polygon
+        glColor3f(1.0, 0.0, 0.0)            # Red
+        glVertex3f(0.0, 1.0, 0.0)           # Top
+        glColor3f(0.0, 1.0, 0.0)            # Green
+        glVertex3f(1.0, -1.0, 0.0)          # Bottom Right
+        glColor3f(0.0, 0.0, 1.0)            # Blue
+        glVertex3f(-1.0, -1.0, 0.0)         # Bottom Left
+        glEnd()
+
+        glutSwapBuffers()
+

@@ -10,7 +10,7 @@ class Component(object):
 class Ball(Component):
     resolution = 64
     circle_points = [(cos(t*2*pi/resolution), sin(t*2*pi/resolution)) for t in xrange(0, resolution)]
-    def __init__(self, center,
+    def __init__(self, center=(0.0,0.0),
                        radius=1,
                        is_solid=True,
                        color = (1.0,0.0,0.0)
