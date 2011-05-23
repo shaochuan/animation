@@ -1,0 +1,25 @@
+Shao-Chuan Wang
+shaochuan.wang AT gmail DOT com
+
+An Object-oriented Animation Framework.
+
+
+EXECUTION ENVIRONMENT
+=====================================
+The codes were tested under MacOS, but should be also 
+working under Linux system.
+
+
+HOW TO INSTALL?
+=====================================
+You need python 2.5.1 (or newer version), pyOpenGL (2.0 or newer) and cython 0.13 (or newer).
+
+#Building by executing the script.
+#  $ sh install.sh
+
+HOW TO RUN?
+=====================================
+
+1. Executing the main.py script, for example
+  $ python main.py -i scene/twoballs.sc
+
